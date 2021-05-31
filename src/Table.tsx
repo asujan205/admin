@@ -11,7 +11,15 @@ import 'antd/dist/antd.css';
   comments:string,
   flags:Boolean,
 }
-
+const user: User = {
+  name:"",
+email:"",
+membership:"",
+post:" ",
+comments:"",
+flags:false,
+}
+     
 const columns = [
   {
     title: 'Name',
@@ -151,7 +159,7 @@ const content = (
   </div>
 );
 //const row:User[];
-const data:User[] = [
+/*const data:User[] = [
    {
     
     name: 'John Brown',
@@ -160,13 +168,19 @@ const data:User[] = [
    post:"engineer",
    comments:"hello world",
    flags:true
-  },
+  }, 
   
-];
+];*/
 const url="";
-function table(){
+function Tabledata(){
+ const[user,setUser]=useState<User>({}as User)
+ useEffect(()=>{
+   fetch("http://localhost:5000/User")
+   .then((res)=>res.json())
+   .then((res)=>setUser(res.data))
+ })
 return(
-<Table columns={columns} dataSource={data}  />
+<Table columns={columns} dataSource={user}  />
 );
 }
-export default table;
+export default Tabledata;
